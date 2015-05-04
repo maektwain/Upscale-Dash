@@ -135,6 +135,10 @@ public final class Client extends AbstractPersistable<Long> {
     @JoinColumn(name = "dependent_cv_id", nullable = true)
     private CodeValue dependent;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "education_cv_id", nullable = true)
+    private CodeValue education;
+    
     @ManyToOne
     @JoinColumn(name = "staff_id")
     private Staff staff;
@@ -228,7 +232,7 @@ public final class Client extends AbstractPersistable<Long> {
     private CodeValue clientClassification;
 
     public static Client createNew(final AppUser currentUser, final Office clientOffice, final Group clientParentGroup, final Staff staff,
-            final SavingsProduct savingsProduct, final CodeValue gender, final CodeValue marital,final CodeValue religion,final CodeValue dependent, final CodeValue clientType, final CodeValue clientClassification,
+            final SavingsProduct savingsProduct, final CodeValue gender, final CodeValue marital,final CodeValue religion,final CodeValue dependent,final CodeValue education, final CodeValue clientType, final CodeValue clientClassification,
             final JsonCommand command) {
 
         final String accountNo = command.stringValueOfParameterNamed(ClientApiConstants.accountNoParamName);
@@ -268,7 +272,7 @@ public final class Client extends AbstractPersistable<Long> {
         final SavingsAccount account = null;
         return new Client(currentUser, status, clientOffice, clientParentGroup, accountNo, firstname, middlename, lastname, fullname,fathername,emailAddress,
                 activationDate, officeJoiningDate, externalId, mobileNo, staff, submittedOnDate, savingsProduct, account, dataOfBirth,
-                gender,marital,religion,dependent, clientType, clientClassification);
+                gender,marital,religion,dependent,education, clientType, clientClassification);
     }
 
     protected Client() {
@@ -281,7 +285,7 @@ public final class Client extends AbstractPersistable<Long> {
             final String emailAddress,
             final LocalDate activationDate, final LocalDate officeJoiningDate, final String externalId, final String mobileNo,
             final Staff staff, final LocalDate submittedOnDate, final SavingsProduct savingsProduct, final SavingsAccount savingsAccount,
-            final LocalDate dateOfBirth, final CodeValue gender, final CodeValue marital,final CodeValue religion,final CodeValue dependent, final CodeValue clientType, final CodeValue clientClassification) {
+            final LocalDate dateOfBirth, final CodeValue gender, final CodeValue marital,final CodeValue religion,final CodeValue dependent,final CodeValue education, final CodeValue clientType, final CodeValue clientClassification) {
 
         if (StringUtils.isBlank(accountNo)) {
             this.accountNumber = new RandomPasswordGenerator(19).generate();
@@ -372,6 +376,9 @@ public final class Client extends AbstractPersistable<Long> {
         if (dependent !=null){
         	this.dependent = dependent;
         }
+        if(education != null){
+        	this.education = education;
+        }
         
         if (dateOfBirth != null) {
             this.dateOfBirth = dateOfBirth.toDateTimeAtStartOfDay().toDate();
@@ -380,6 +387,7 @@ public final class Client extends AbstractPersistable<Long> {
         this.marital = marital;
         this.clientType = clientType;
         this.dependent = dependent;
+        this.education = education;
         this.clientClassification = clientClassification;
 
         deriveDisplayName();
@@ -558,6 +566,10 @@ public final class Client extends AbstractPersistable<Long> {
         if (command.isChangeInLongParameterNamed(ClientApiConstants.dependentIdParamName, dependentId())){
         	final Long newValue = command.longValueOfParameterNamed(ClientApiConstants.dependentIdParamName);
         	actualChanges.put(ClientApiConstants.dependentIdParamName,newValue);
+        }
+        if (command.isChangeInLongParameterNamed(ClientApiConstants.educationIdParamName, dependentId())){
+        	final Long newValue = command.longValueOfParameterNamed(ClientApiConstants.educationIdParamName);
+        	actualChanges.put(ClientApiConstants.educationIdParamName,newValue);
         }
 
         if (command.isChangeInLongParameterNamed(ClientApiConstants.savingsProductIdParamName, savingsProductId())) {
@@ -969,10 +981,16 @@ public final class Client extends AbstractPersistable<Long> {
     	this.religion = religion;
     }
     public CodeValue dependent(){
-    	return this.dependent = dependent;
+    	return this.dependent;
     }
     public void updateDependent(CodeValue dependent){
     	this.dependent = dependent;
+    }
+    public CodeValue education(){
+    	return this.education;
+    }
+    public void updateEducation(CodeValue education){
+    	this.education = education;
     }
     
 

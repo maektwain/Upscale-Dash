@@ -104,7 +104,9 @@ public class ClientReadPlatformServiceImpl implements ClientReadPlatformService 
         final List<CodeValueData>religionOptions = new ArrayList<>(
         		this.codeValueReadPlatformService.retrieveCodeValuesByCode(ClientApiConstants.RELIGION));
         final List<CodeValueData>dependentOptions = new ArrayList<>(
-        		this.codeValueReadPlatformService.retrieveCodeValuesByCode(ClientApiConstants.DEPENDENT));      		
+        		this.codeValueReadPlatformService.retrieveCodeValuesByCode(ClientApiConstants.DEPENDENT));
+        final List<CodeValueData>educationOptions = new ArrayList<>(
+        		this.codeValueReadPlatformService.retrieveCodeValuesByCode(ClientApiConstants.EDUCATION));        
 
         final List<CodeValueData> clientTypeOptions = new ArrayList<>(
                 this.codeValueReadPlatformService.retrieveCodeValuesByCode(ClientApiConstants.CLIENT_TYPE));
@@ -112,7 +114,7 @@ public class ClientReadPlatformServiceImpl implements ClientReadPlatformService 
         final List<CodeValueData> clientClassificationOptions = new ArrayList<>(
                 this.codeValueReadPlatformService.retrieveCodeValuesByCode(ClientApiConstants.CLIENT_CLASSIFICATION));
 
-        return ClientData.template(defaultOfficeId, new LocalDate(), offices, staffOptions, null, genderOptions,maritalOptions,religionOptions,dependentOptions, null, clientTypeOptions, clientClassificationOptions);
+        return ClientData.template(defaultOfficeId, new LocalDate(), offices, staffOptions, null, genderOptions,maritalOptions,religionOptions,dependentOptions,educationOptions, null, clientTypeOptions, clientClassificationOptions);
     }
 
     @Override
@@ -298,6 +300,8 @@ public class ClientReadPlatformServiceImpl implements ClientReadPlatformService 
             sqlBuilder.append("cvreligion.code_value as religionValue,");
             sqlBuilder.append("c.dependent_cv_id as dependentId, ");
             sqlBuilder.append("cvdependent.code_value as dependentValue, ");
+            sqlBuilder.append("c.education_cv_id as educationId, ");
+            sqlBuilder.append("cveducation.code_value as educationValue, ");
             sqlBuilder.append("c.client_type_cv_id as clienttypeId, ");
             sqlBuilder.append("cvclienttype.code_value as clienttypeValue, ");
             sqlBuilder.append("c.client_classification_cv_id as classificationId, ");
@@ -336,6 +340,7 @@ public class ClientReadPlatformServiceImpl implements ClientReadPlatformService 
             sqlBuilder.append("left join m_code_value cvmarital on cvmarital.id = c.marital_cv_id ");
             sqlBuilder.append("left join m_code_value cvreligion on cvreligion.id = c.religion_cv_id ");
             sqlBuilder.append("left join m_code_value cvdependent on cvdependent.id = c.dependent_cv_id ");
+            sqlBuilder.append("left join m_code_value cveducation on cveducation.id = c.education_cv_id ");
             sqlBuilder.append("left join m_code_value cvclassification on cvclassification.id = c.client_classification_cv_id ");
             sqlBuilder.append("left join m_code_value cvSubStatus on cvSubStatus.id = c.sub_status ");
 
@@ -388,6 +393,11 @@ public class ClientReadPlatformServiceImpl implements ClientReadPlatformService 
             final Long dependentId = JdbcSupport.getLong(rs, "dpendentId");
             final String dependentValue = rs.getString("dependentValue");
             final CodeValueData dependent = CodeValueData.instance(dependentId, dependentValue);
+            final Long educationId = JdbcSupport.getLong(rs, "educationId");
+            final String educationValue = rs.getString("educationValue");
+            final CodeValueData education = CodeValueData.instance(educationId, educationValue);
+  
+            
             final Long clienttypeId = JdbcSupport.getLong(rs, "clienttypeId");
             final String clienttypeValue = rs.getString("clienttypeValue");
             final CodeValueData clienttype = CodeValueData.instance(clienttypeId, clienttypeValue);
@@ -425,7 +435,7 @@ public class ClientReadPlatformServiceImpl implements ClientReadPlatformService 
                     closedByUsername, closedByFirstname, closedByLastname);
 
             return ClientData.instance(accountNo, status, subStatus, officeId, officeName, transferToOfficeId, transferToOfficeName, id,
-                    firstname, middlename, lastname, fullname, displayName,fathername, emailAddress,externalId, mobileNo, dateOfBirth, gender,marital,religion,dependent,activationDate,
+                    firstname, middlename, lastname, fullname, displayName,fathername, emailAddress,externalId, mobileNo, dateOfBirth, gender,marital,religion,dependent,education,activationDate,
                     imageId, staffId, staffName, timeline, savingsProductId, savingsProductName, savingsAccountId, clienttype,
                     classification);
 
@@ -471,6 +481,8 @@ public class ClientReadPlatformServiceImpl implements ClientReadPlatformService 
             builder.append("cvreligion.code_value as religionValue,");
             builder.append("c.dependent_cv_id as dependentId, ");
             builder.append("cvdependent.code_value as dependentValue, ");
+            builder.append("c.education_cv_id as educationId, ");
+            builder.append("cveducation.code_value as educationValue, ");
             builder.append("c.client_type_cv_id as clienttypeId, ");
             builder.append("cvclienttype.code_value as clienttypeValue, ");
             builder.append("c.client_classification_cv_id as classificationId, ");
@@ -507,6 +519,7 @@ public class ClientReadPlatformServiceImpl implements ClientReadPlatformService 
             builder.append("left join m_code_value cvmarital on cvmarital.id = c.marital_cv_id ");
             builder.append("left join m_code_value cvreligion on cvreligion.id = c.religion_cv_id ");
             builder.append("left join m_code_value cvdependent on cvdependent.id = c.dependent_cv_id ");
+            builder.append("left join m_code_value cveducation on cveducation.id = c.education_cv_id ");
             builder.append("left join m_code_value cvclassification on cvclassification.id = c.client_classification_cv_id ");
             builder.append("left join m_code_value cvSubStatus on cvSubStatus.id = c.sub_status ");
 
@@ -563,6 +576,10 @@ public class ClientReadPlatformServiceImpl implements ClientReadPlatformService 
             final String dependentValue = rs.getString("dependentValue");
             final CodeValueData dependent = CodeValueData.instance(dependentId, dependentValue);
             
+            final Long educationId = JdbcSupport.getLong(rs, "educationId");
+            final String educationValue = rs.getString("educationValue");
+            final CodeValueData education = CodeValueData.instance(educationId, educationValue);
+            
             
             final Long clienttypeId = JdbcSupport.getLong(rs, "clienttypeId");
             final String clienttypeValue = rs.getString("clienttypeValue");
@@ -600,7 +617,7 @@ public class ClientReadPlatformServiceImpl implements ClientReadPlatformService 
                     closedByUsername, closedByFirstname, closedByLastname);
 
             return ClientData.instance(accountNo, status, subStatus, officeId, officeName, transferToOfficeId, transferToOfficeName, id,
-                    firstname, middlename, lastname, fullname, displayName,fathername,emailAddress, externalId, mobileNo, dateOfBirth, gender,marital,religion,dependent, activationDate,
+                    firstname, middlename, lastname, fullname, displayName,fathername,emailAddress, externalId, mobileNo, dateOfBirth, gender,marital,religion,dependent,education, activationDate,
                     imageId, staffId, staffName, timeline, savingsProductId, savingsProductName, savingsAccountId, clienttype,
                     classification);
 
@@ -711,7 +728,7 @@ public class ClientReadPlatformServiceImpl implements ClientReadPlatformService 
         final List<CodeValueData> narrations = new ArrayList<>(this.codeValueReadPlatformService.retrieveCodeValuesByCode(clientNarrations));
         final Collection<CodeValueData> clientTypeOptions = null;
         final Collection<CodeValueData> clientClassificationOptions = null;
-        return ClientData.template(null, null, null, null, narrations, null, null, null,null,null, clientTypeOptions, clientClassificationOptions);
+        return ClientData.template(null, null, null, null, narrations, null, null, null,null,null,null, clientTypeOptions, clientClassificationOptions);
     }
 
 }

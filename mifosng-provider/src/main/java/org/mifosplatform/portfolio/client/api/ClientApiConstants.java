@@ -20,6 +20,7 @@ public class ClientApiConstants {
     public static final String CLIENT_WITHDRAW_REASON = "ClientWithdrawReason";
 
     public static final String DEPENDENT = "Dependents";
+    public static final String EDUCATION = "Education";
     public static final String RELIGION = "Religion";
     public static final String MARITAL = "MaritalStatus";
     public static final String GENDER = "Gender";
@@ -69,6 +70,8 @@ public class ClientApiConstants {
     public static final String religionParamName = "relegion" ;
     public static final String dependentIdParamName = "dependentId";
     public static final String dependentParamName = "dependent";
+    public static final String educationIdParamName = "educationId";
+    public static final String educationParamName = "education";
     public static final String clientTypeIdParamName = "clientTypeId";
     public static final String clientTypeParamName = "clientType";
     public static final String clientClassificationIdParamName = "clientClassificationId";
@@ -97,13 +100,13 @@ public class ClientApiConstants {
     public static final Set<String> CLIENT_CREATE_REQUEST_DATA_PARAMETERS = new HashSet<>(Arrays.asList(localeParamName,
             dateFormatParamName, groupIdParamName, accountNoParamName, externalIdParamName, mobileNoParamName, firstnameParamName,
             middlenameParamName, lastnameParamName, fullnameParamName,fathernameParamName,emailAddressParamName, officeIdParamName, activeParamName, activationDateParamName,
-            staffIdParamName, submittedOnDateParamName, savingsProductIdParamName, dateOfBirthParamName, genderIdParamName,maritalIdParamName,religionIdParamName,dependentIdParamName,
+            staffIdParamName, submittedOnDateParamName, savingsProductIdParamName, dateOfBirthParamName, genderIdParamName,maritalIdParamName,religionIdParamName,dependentIdParamName,educationIdParamName,
             clientTypeIdParamName, clientClassificationIdParamName));
 
     public static final Set<String> CLIENT_UPDATE_REQUEST_DATA_PARAMETERS = new HashSet<>(Arrays.asList(localeParamName,
             dateFormatParamName, accountNoParamName, externalIdParamName, mobileNoParamName, firstnameParamName, middlenameParamName,
             lastnameParamName, fullnameParamName,fathernameParamName,emailAddressParamName, activeParamName, activationDateParamName, staffIdParamName, savingsProductIdParamName,
-            dateOfBirthParamName, genderIdParamName,maritalIdParamName,religionIdParamName,dependentIdParamName, clientTypeIdParamName, clientClassificationIdParamName,submittedOnDateParamName));
+            dateOfBirthParamName, genderIdParamName,maritalIdParamName,religionIdParamName,dependentIdParamName,educationIdParamName, clientTypeIdParamName, clientClassificationIdParamName,submittedOnDateParamName));
 
 
     /**
@@ -116,7 +119,7 @@ public class ClientApiConstants {
             lastnameParamName, fullnameParamName,fathernameParamName, emailAddressParamName,displayNameParamName, mobileNoParamName, officeIdParamName, officeNameParamName,
             transferToOfficeIdParamName, transferToOfficeNameParamName, hierarchyParamName, imageIdParamName, imagePresentParamName,
             staffIdParamName, staffNameParamName, timelineParamName, groupsParamName, officeOptionsParamName, staffOptionsParamName,
-            dateOfBirthParamName, genderParamName,maritalParamName,religionParamName,dependentParamName,clientTypeParamName,clientClassificationParamName));
+            dateOfBirthParamName, genderParamName,maritalParamName,religionParamName,dependentParamName,educationParamName,clientTypeParamName,clientClassificationParamName));
 
     public static final Set<String> ACTIVATION_REQUEST_DATA_PARAMETERS = new HashSet<>(Arrays.asList(localeParamName,
             dateFormatParamName, activationDateParamName));

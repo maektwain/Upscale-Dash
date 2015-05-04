@@ -221,6 +221,11 @@ public class ClientWritePlatformServiceJpaRepositoryImpl implements ClientWriteP
             if (dependentId != null){
             	dependent = this.codeValueRepository.findOneByCodeNameAndIdWithNotFoundDetection(ClientApiConstants.DEPENDENT, dependentId);
             }
+            CodeValue education = null;
+            final Long educationId = command.longValueOfParameterNamed(ClientApiConstants.educationIdParamName);
+            if (educationId != null){
+            	education = this.codeValueRepository.findOneByCodeNameAndIdWithNotFoundDetection(ClientApiConstants.EDUCATION, educationId);
+            }
             CodeValue clientType = null;
             final Long clientTypeId = command.longValueOfParameterNamed(ClientApiConstants.clientTypeIdParamName);
             if (clientTypeId != null) {
@@ -243,7 +248,7 @@ public class ClientWritePlatformServiceJpaRepositoryImpl implements ClientWriteP
 
             }
 
-            final Client newClient = Client.createNew(currentUser, clientOffice, clientParentGroup, staff, savingsProduct, gender,marital,religion,dependent,
+            final Client newClient = Client.createNew(currentUser, clientOffice, clientParentGroup, staff, savingsProduct, gender,marital,religion,dependent,education,
                     clientType, clientClassification, command);
             boolean rollbackTransaction = false;
             if (newClient.isActive()) {
@@ -360,6 +365,14 @@ public class ClientWritePlatformServiceJpaRepositoryImpl implements ClientWriteP
                 CodeValue newCodeVal = null;
                 if (newValue != null) {
                     newCodeVal = this.codeValueRepository.findOneByCodeNameAndIdWithNotFoundDetection(ClientApiConstants.DEPENDENT, newValue);
+                }
+                clientForUpdate.updateReligion(newCodeVal);
+            }
+            if (changes.containsKey(ClientApiConstants.educationIdParamName)) {
+                final Long newValue = command.longValueOfParameterNamed(ClientApiConstants.educationIdParamName);
+                CodeValue newCodeVal = null;
+                if (newValue != null) {
+                    newCodeVal = this.codeValueRepository.findOneByCodeNameAndIdWithNotFoundDetection(ClientApiConstants.EDUCATION, newValue);
                 }
                 clientForUpdate.updateReligion(newCodeVal);
             }

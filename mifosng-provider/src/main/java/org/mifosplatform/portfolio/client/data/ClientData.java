@@ -49,6 +49,7 @@ final public class ClientData implements Comparable<ClientData> {
     private final CodeValueData marital;
     private final CodeValueData religion;
     private final CodeValueData dependent;
+    private final CodeValueData education;
     private final CodeValueData clientType;
     private final CodeValueData clientClassification;
     
@@ -82,13 +83,14 @@ final public class ClientData implements Comparable<ClientData> {
     private final Collection<CodeValueData> maritalOptions;
     private final Collection<CodeValueData> religionOptions;
     private final Collection<CodeValueData> dependentOptions;
+    private final Collection<CodeValueData> educationOptions;
     private final Collection<CodeValueData> clientTypeOptions;
     private final Collection<CodeValueData> clientClassificationOptions;
 	
 
     public static ClientData template(final Long officeId, final LocalDate joinedDate, final Collection<OfficeData> officeOptions,
             final Collection<StaffData> staffOptions, final Collection<CodeValueData> narrations,
-            final Collection<CodeValueData> genderOptions, final Collection<CodeValueData> maritalOptions,final Collection<CodeValueData> religionOptions,final Collection<CodeValueData> dependentOptions, final Collection<SavingsProductData> savingProductOptions,
+            final Collection<CodeValueData> genderOptions, final Collection<CodeValueData> maritalOptions,final Collection<CodeValueData> religionOptions,final Collection<CodeValueData> dependentOptions, final Collection<CodeValueData> educationOptions,final Collection<SavingsProductData> savingProductOptions,
             final Collection<CodeValueData> clientTypeOptions, final Collection<CodeValueData> clientClassificationOptions) {
         final String accountNo = null;
         final EnumOptionData status = null;
@@ -111,6 +113,7 @@ final public class ClientData implements Comparable<ClientData> {
         final CodeValueData marital = null;
         final CodeValueData religion = null;
         final CodeValueData dependent = null;
+        final CodeValueData education = null;
         final Long imageId = null;
         final Long staffId = null;
         final String staffName = null;
@@ -123,8 +126,8 @@ final public class ClientData implements Comparable<ClientData> {
         final CodeValueData clientType = null;
         final CodeValueData clientClassification = null;
         return new ClientData(accountNo, status, subStatus, officeId, officeName, transferToOfficeId, transferToOfficeName, id, firstname,
-                middlename, lastname, fullname, displayName,fathername,emailAddress, externalId, mobileNo, dateOfBirth, gender,marital,religion,dependent, joinedDate, imageId, staffId,
-                staffName, officeOptions, groups, staffOptions, narrations, genderOptions, maritalOptions,religionOptions,dependentOptions, timeline, savingProductOptions,
+                middlename, lastname, fullname, displayName,fathername,emailAddress, externalId, mobileNo, dateOfBirth, gender,marital,religion,dependent,education, joinedDate, imageId, staffId,
+                staffName, officeOptions, groups, staffOptions, narrations, genderOptions, maritalOptions,religionOptions,dependentOptions,educationOptions, timeline, savingProductOptions,
                 savingsProductId, savingsProductName, savingsAccountId, savingAccountOptions, clientType, clientClassification,
                 clientTypeOptions, clientClassificationOptions);
 
@@ -135,9 +138,9 @@ final public class ClientData implements Comparable<ClientData> {
         return new ClientData(clientData.accountNo,clientData.status, clientData.subStatus, clientData.officeId, clientData.officeName,
                 clientData.transferToOfficeId, clientData.transferToOfficeName, clientData.id, clientData.firstname, clientData.middlename,
                 clientData.lastname, clientData.fullname, clientData.displayName,clientData.fathername,clientData.emailAddress,clientData.externalId, clientData.mobileNo,
-                clientData.dateOfBirth, clientData.gender, clientData.marital, clientData.religion,clientData.dependent,clientData.activationDate, clientData.imageId, clientData.staffId,
+                clientData.dateOfBirth, clientData.gender, clientData.marital, clientData.religion,clientData.dependent,clientData.education,clientData.activationDate, clientData.imageId, clientData.staffId,
                 clientData.staffName, templateData.officeOptions, clientData.groups, templateData.staffOptions, templateData.narrations,
-                templateData.genderOptions,templateData.maritalOptions,templateData.religionOptions,templateData.dependentOptions, clientData.timeline, templateData.savingProductOptions, clientData.savingsProductId,
+                templateData.genderOptions,templateData.maritalOptions,templateData.religionOptions,templateData.dependentOptions,templateData.educationOptions,clientData.timeline, templateData.savingProductOptions, clientData.savingsProductId,
                 clientData.savingsProductName, clientData.savingsAccountId, clientData.savingAccountOptions, clientData.clientType,
                 clientData.clientClassification, templateData.clientTypeOptions, templateData.clientClassificationOptions);
 
@@ -149,9 +152,9 @@ final public class ClientData implements Comparable<ClientData> {
         return new ClientData(clientData.accountNo, clientData.status, clientData.subStatus, clientData.officeId, clientData.officeName,
                 clientData.transferToOfficeId, clientData.transferToOfficeName, clientData.id, clientData.firstname, clientData.middlename,
                 clientData.lastname, clientData.fullname, clientData.displayName,clientData.fathername, clientData.emailAddress,clientData.externalId, clientData.mobileNo,
-                clientData.dateOfBirth, clientData.gender,clientData.marital,clientData.religion,clientData.dependent, clientData.activationDate, clientData.imageId, clientData.staffId,
+                clientData.dateOfBirth, clientData.gender,clientData.marital,clientData.religion,clientData.dependent,clientData.education, clientData.activationDate, clientData.imageId, clientData.staffId,
                 clientData.staffName, clientData.officeOptions, clientData.groups, clientData.staffOptions, clientData.narrations,
-                clientData.genderOptions,clientData.maritalOptions,clientData.religionOptions,clientData.dependentOptions, clientData.timeline, clientData.savingProductOptions, clientData.savingsProductId,
+                clientData.genderOptions,clientData.maritalOptions,clientData.religionOptions,clientData.dependentOptions,clientData.educationOptions, clientData.timeline, clientData.savingProductOptions, clientData.savingsProductId,
                 clientData.savingsProductName, clientData.savingsAccountId, savingAccountOptions, clientData.clientType,
                 clientData.clientClassification, clientData.clientTypeOptions, clientData.clientClassificationOptions);
 
@@ -161,8 +164,8 @@ final public class ClientData implements Comparable<ClientData> {
         return new ClientData(clientData.accountNo, clientData.status, clientData.subStatus, clientData.officeId, clientData.officeName,
                 clientData.transferToOfficeId, clientData.transferToOfficeName, clientData.id, clientData.firstname, clientData.middlename,
                 clientData.lastname, clientData.fullname, clientData.displayName, clientData.fathername,clientData.emailAddress,clientData.externalId, clientData.mobileNo,
-                clientData.dateOfBirth, clientData.gender,clientData.marital,clientData.religion,clientData.dependent,clientData.activationDate, clientData.imageId, clientData.staffId,
-                clientData.staffName, clientData.officeOptions, parentGroups, clientData.staffOptions, clientData.maritalOptions,clientData.religionOptions, clientData.dependentOptions,null, null, clientData.timeline,
+                clientData.dateOfBirth, clientData.gender,clientData.marital,clientData.religion,clientData.dependent,clientData.education,clientData.activationDate, clientData.imageId, clientData.staffId,
+                clientData.staffName, clientData.officeOptions, parentGroups, clientData.staffOptions, clientData.maritalOptions,clientData.religionOptions, clientData.dependentOptions,clientData.educationOptions,null, null, clientData.timeline,
                 clientData.savingProductOptions, clientData.savingsProductId, clientData.savingsProductName, clientData.savingsAccountId,
                 clientData.savingAccountOptions, clientData.clientType, clientData.clientClassification, clientData.clientTypeOptions,
                 clientData.clientClassificationOptions);
@@ -181,6 +184,7 @@ final public class ClientData implements Comparable<ClientData> {
         final CodeValueData marital = null;
         final CodeValueData religion = null;
         final CodeValueData dependent = null;
+        final CodeValueData education = null;
         //final String emailAddress = null;
         final LocalDate activationDate = null;
         final Long imageId = null;
@@ -194,6 +198,7 @@ final public class ClientData implements Comparable<ClientData> {
         final Collection<CodeValueData>maritalOptions = null;
         final Collection<CodeValueData>religionOptions = null;
         final Collection<CodeValueData>dependentOptions = null;
+        final Collection<CodeValueData>educationOptions = null;
         final ClientTimelineData timeline = null;
         final Collection<SavingsProductData> savingProductOptions = null;
         final Long savingsProductId = null;
@@ -207,8 +212,8 @@ final public class ClientData implements Comparable<ClientData> {
         final EnumOptionData status = null;
         final CodeValueData subStatus = null;
         return new ClientData(accountNo, status, subStatus, officeId, officeName, transferToOfficeId, transferToOfficeName, id, firstname,
-                middlename, lastname, fullname, displayName,fathername,emailAddress, externalId, mobileNo, dateOfBirth, gender,marital,religion,dependent, activationDate, imageId, staffId,
-                staffName, allowedOffices, groups, staffOptions, closureReasons, genderOptions,maritalOptions,religionOptions,dependentOptions, timeline, savingProductOptions,
+                middlename, lastname, fullname, displayName,fathername,emailAddress, externalId, mobileNo, dateOfBirth, gender,marital,religion,dependent,education, activationDate, imageId, staffId,
+                staffName, allowedOffices, groups, staffOptions, closureReasons, genderOptions,maritalOptions,religionOptions,dependentOptions,educationOptions, timeline, savingProductOptions,
                 savingsProductId, savingsProductName, savingsAccountId, savingAccountOptions, clientType, clientClassification,
                 clientTypeOptions, clientClassificationOptions);
     }
@@ -232,6 +237,7 @@ final public class ClientData implements Comparable<ClientData> {
         final CodeValueData marital = null;
         final CodeValueData religion = null;
         final CodeValueData dependent = null;
+        final CodeValueData education = null;
         //final String emailAddress = null;
         final LocalDate activationDate = null;
         final Long imageId = null;
@@ -245,6 +251,7 @@ final public class ClientData implements Comparable<ClientData> {
         final Collection<CodeValueData> maritalOptions = null;
         final Collection<CodeValueData> religionOptions = null;
         final Collection<CodeValueData> dependentOptions = null;
+        final Collection<CodeValueData> educationOptions = null;
         final ClientTimelineData timeline = null;
         final Collection<SavingsProductData> savingProductOptions = null;
         final Long savingsProductId = null;
@@ -256,8 +263,8 @@ final public class ClientData implements Comparable<ClientData> {
         final Collection<CodeValueData> clientTypeOptions = null;
         final Collection<CodeValueData> clientClassificationOptions = null;
         return new ClientData(accountNo, status, subStatus, officeId, officeName, transferToOfficeId, transferToOfficeName, id, firstname,
-                middlename, lastname, fullname, displayName,fathername,emailAddress, externalId, mobileNo, dateOfBirth, gender,marital,religion,dependent,activationDate, imageId, staffId,
-                staffName, allowedOffices, groups, staffOptions, closureReasons, genderOptions,maritalOptions,religionOptions,dependentOptions, timeline, savingProductOptions,
+                middlename, lastname, fullname, displayName,fathername,emailAddress, externalId, mobileNo, dateOfBirth, gender,marital,religion,dependent,education,activationDate, imageId, staffId,
+                staffName, allowedOffices, groups, staffOptions, closureReasons, genderOptions,maritalOptions,religionOptions,dependentOptions,educationOptions, timeline, savingProductOptions,
                 savingsProductId, savingsProductName, savingsAccountId, savingAccountOptions, clientType, clientClassification,
                 clientTypeOptions, clientClassificationOptions);
 
@@ -268,6 +275,7 @@ final public class ClientData implements Comparable<ClientData> {
             final String firstname, final String middlename, final String lastname, final String fullname, final String displayName,final String fathername,
             final String emailAddress,
             final String externalId, final String mobileNo, final LocalDate dateOfBirth, final CodeValueData gender,final CodeValueData marital, final CodeValueData religion,final CodeValueData dependent,
+            final CodeValueData education,
             final LocalDate activationDate, final Long imageId, final Long staffId, final String staffName,
             final ClientTimelineData timeline, final Long savingsProductId, final String savingsProductName, final Long savingsAccountId,
             final CodeValueData clientType, final CodeValueData clientClassification) {
@@ -280,12 +288,13 @@ final public class ClientData implements Comparable<ClientData> {
         final Collection<CodeValueData> maritalOptions = null;
         final Collection<CodeValueData> religionOptions = null;
         final Collection<CodeValueData> dependentOptions = null;
+        final Collection<CodeValueData> educationOptions = null;
         final Collection<SavingsProductData> savingProductOptions = null;
         final Collection<CodeValueData> clientTypeOptions = null;
         final Collection<CodeValueData> clientClassificationOptions = null;
         return new ClientData(accountNo, status, subStatus, officeId, officeName, transferToOfficeId, transferToOfficeName, id, firstname,
-                middlename, lastname, fullname, displayName,fathername,emailAddress, externalId, mobileNo, dateOfBirth, gender,marital,religion,dependent, activationDate, imageId, staffId,
-                staffName, allowedOffices, groups, staffOptions, closureReasons, genderOptions,maritalOptions,religionOptions,dependentOptions, timeline, savingProductOptions,
+                middlename, lastname, fullname, displayName,fathername,emailAddress, externalId, mobileNo, dateOfBirth, gender,marital,religion,dependent,education, activationDate, imageId, staffId,
+                staffName, allowedOffices, groups, staffOptions, closureReasons, genderOptions,maritalOptions,religionOptions,dependentOptions,educationOptions, timeline, savingProductOptions,
                 savingsProductId, savingsProductName, savingsAccountId, null, clientType, clientClassification, clientTypeOptions,
                 clientClassificationOptions);
 
@@ -296,10 +305,11 @@ final public class ClientData implements Comparable<ClientData> {
             final String firstname, final String middlename, final String lastname, final String fullname, final String displayName,final String fathername,
             final String emailAddress,
             final String externalId, final String mobileNo, final LocalDate dateOfBirth, final CodeValueData gender,final CodeValueData marital,final CodeValueData religion,final CodeValueData dependent,
+            final CodeValueData education,
             final LocalDate activationDate, final Long imageId, final Long staffId, final String staffName,
             final Collection<OfficeData> allowedOffices, final Collection<GroupGeneralData> groups,
             final Collection<StaffData> staffOptions, final Collection<CodeValueData> narrations,
-            final Collection<CodeValueData> genderOptions,final Collection<CodeValueData> maritalOptions,final Collection<CodeValueData> religionOptions,final Collection<CodeValueData> dependentOptions, final ClientTimelineData timeline,
+            final Collection<CodeValueData> genderOptions,final Collection<CodeValueData> maritalOptions,final Collection<CodeValueData> religionOptions,final Collection<CodeValueData> dependentOptions,final Collection<CodeValueData> educationOptions, final ClientTimelineData timeline,
             final Collection<SavingsProductData> savingProductOptions, final Long savingsProductId, final String savingsProductName,
             final Long savingsAccountId, final Collection<SavingsAccountData> savingAccountOptions, final CodeValueData clientType,
             final CodeValueData clientClassification, final Collection<CodeValueData> clientTypeOptions,
@@ -332,6 +342,7 @@ final public class ClientData implements Comparable<ClientData> {
         this.marital = marital;
         this.religion = religion;
         this.dependent = dependent;
+        this.education = education;
         this.clientClassification = clientClassification;
         this.clientType = clientType;
         this.imageId = imageId;
@@ -355,6 +366,7 @@ final public class ClientData implements Comparable<ClientData> {
         this.maritalOptions = maritalOptions;
         this.religionOptions = religionOptions;
         this.dependentOptions = dependentOptions;
+        this.educationOptions = educationOptions;
         this.clientClassificationOptions = clientClassificationOptions;
         this.clientTypeOptions = clientTypeOptions;
 
